@@ -1,5 +1,5 @@
-def chain(lst1, lst2):
-    for item in lst1:
+def chain(iterable_one, iterable_two):
+    for item in iterable_one:
         yield item
-    for item in lst2:
+    for item in iterable_two:
         yield item
