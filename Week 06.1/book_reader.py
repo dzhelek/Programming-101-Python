@@ -7,7 +7,7 @@ def get_chapter(filename):
     with ZipFile(filename, 'r') as z:
         for file in z.namelist():
             with z.open(file, 'r') as f:
-                print()
+                print('\n')
                 for line in f.readlines():
                     line = line.decode('utf-8')
                     if line.startswith('#'):
@@ -18,7 +18,7 @@ def get_chapter(filename):
 
 
 def main():
-    chapters = get_chapter('Book.zip')
+    chapters = get_chapter('book.zip')
     for chapter in chapters:
 
         pressed = None
