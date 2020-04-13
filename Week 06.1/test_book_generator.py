@@ -10,14 +10,14 @@ class TestBookGenerator(unittest.TestCase):
 
         result = next(file)
 
-        self.assertEqual(result, '001.txt')
+        self.assertEqual(result, '000001.txt')
 
     def test_generate_filenames_on_999th_call(self):
         file = generate_filenames()
         for i in range(999):
             result = next(file)
 
-        self.assertEqual(result, '999.txt')
+        self.assertEqual(result, '000999.txt')
 
     def test_generate_words_should_every_word_end_with_space(self):
         word = generate_words()
