@@ -61,8 +61,6 @@ def dfs(stack, goal, history, done):
         moves = find_possible_moves(lake)
 
         if goal not in moves:
-            # if moves:
-            #     done = set()
             stack.extend(moves)
             return dfs(stack, goal, history, done)
 
@@ -76,7 +74,6 @@ def frogs(n):
 
     lake = get_lilies(n // 2)
     goal_lake = get_lilies(n // 2, goal=True)
-    # import ipdb; ipdb.set_trace()
     return dfs([lake], goal_lake, [], set())
 
 
@@ -89,13 +86,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# ['>>_<<',
-#  '>><_<',
-#  '>_<><',
-#  '_><><',
-#  '<>_><',
-#  '<><>_',
-#  '<><_>',
-#  '<_<>>',
-#  '<<_>>']
