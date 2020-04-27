@@ -7,7 +7,7 @@ CREATE TABLE Languages (
   );
 
 ALTER TABLE Languages
-  ADD COLUMN rating INTEGER CHECK (1 < rating < 9);
+  ADD COLUMN rating INTEGER CHECK (rating BETWEEN 1 AND 9);
 
 INSERT INTO Languages VALUES
   (1, "Python", "google", 0, "A folder named Python was created. Go there and fight with program.py!", 6),
