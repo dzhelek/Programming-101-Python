@@ -1,6 +1,6 @@
 import unittest
 
-from frogs import (frogs, get_lilies, find_possible_moves, to_tuple)
+from frogs import (frogs, get_lilies, find_possible_moves, main)
 
 
 class TestFrogs(unittest.TestCase):
@@ -50,33 +50,6 @@ class TestFrogs(unittest.TestCase):
         expected = {'<<_>>'}
 
         result = find_possible_moves(lake)
-
-        self.assertEqual(result, expected)
-
-    def test_to_tuple_with_no_history(self):
-        history = []
-        lake = 'd'
-        expected = (None, 'd')
-
-        result = to_tuple(history, lake)
-
-        self.assertEqual(result, expected)
-
-    def test_to_tuple_with_last_history_same_as_lake(self):
-        lake = 'd'
-        history = ['d']
-        expected = (None, 'd')
-
-        result = to_tuple(history, lake)
-
-        self.assertEqual(result, expected)
-
-    def test_to_tuple_with_different_history_from_lake(self):
-        history = ['b', 'c']
-        lake = 'd'
-        expected = ('c', 'd')
-
-        result = to_tuple(history, lake)
 
         self.assertEqual(result, expected)
 

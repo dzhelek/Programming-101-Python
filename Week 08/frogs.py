@@ -47,25 +47,15 @@ def find_possible_moves(lake):
     return result
 
 
-def to_tuple(history, lake):
-    try:
-        previous_lake = history[-1]
-        if previous_lake == lake:
-            previous_lake = history[-2]
-    except IndexError:
-        previous_lake = None
-    return previous_lake, lake
-
-
 def dfs(stack, goal, history, done):
     lake = stack[-1]
 
-    if to_tuple(history, lake) in done:
+    if lake in done and history[-1] == lake:
         history.pop()
         stack.pop()
         return dfs(stack, goal, history, done)
     else:
-        done.add(to_tuple(history, lake))
+        done.add(lake)
         history.append(lake)
 
         moves = find_possible_moves(lake)
@@ -86,12 +76,12 @@ def frogs(n):
 
     lake = get_lilies(n // 2)
     goal_lake = get_lilies(n // 2, goal=True)
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
     return dfs([lake], goal_lake, [], set())
 
 
 def main():
-    solution = frogs(7)
+    solution = frogs(9)
 
     for line in solution:
         print(' '.join(list(line)))
