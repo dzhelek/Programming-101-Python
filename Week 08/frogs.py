@@ -47,24 +47,37 @@ def find_possible_moves(lake):
     return result
 
 
-def dfs(stack, goal, history, to_pop):
-    lake = stack.pop()
-    history.append(lake)
+def to_tuple(history, lake):
+    try:
+        previous_lake = history[-1]
+        if previous_lake == lake:
+            previous_lake = history[-2]
+    except IndexError:
+        previous_lake = None
+    return previous_lake, lake
 
-    moves = find_possible_moves(lake)
 
-    if goal not in moves:
-        to_pop += 1
-        if not moves:
-            for i in range(to_pop):
-                history.pop()
-        to_pop = 0
-        stack.extend(moves)
-        return dfs(stack, goal, history, to_pop)
+def dfs(stack, goal, history, done):
+    lake = stack[-1]
 
-    history.append(goal)
-    print('yeay')
-    return history
+    if to_tuple(history, lake) in done:
+        history.pop()
+        stack.pop()
+        return dfs(stack, goal, history, done)
+    else:
+        done.add(to_tuple(history, lake))
+        history.append(lake)
+
+        moves = find_possible_moves(lake)
+
+        if goal not in moves:
+            # if moves:
+            #     done = set()
+            stack.extend(moves)
+            return dfs(stack, goal, history, done)
+
+        history.append(goal)
+        return history
 
 
 def frogs(n):
@@ -73,5 +86,26 @@ def frogs(n):
 
     lake = get_lilies(n // 2)
     goal_lake = get_lilies(n // 2, goal=True)
-    # import pdb; pdb.set_trace()
-    print(dfs([lake], goal_lake, [], 0))
+    import ipdb; ipdb.set_trace()
+    return dfs([lake], goal_lake, [], set())
+
+
+def main():
+    solution = frogs(7)
+
+    for line in solution:
+        print(' '.join(list(line)))
+
+
+if __name__ == '__main__':
+    main()
+
+# ['>>_<<',
+#  '>><_<',
+#  '>_<><',
+#  '_><><',
+#  '<>_><',
+#  '<><>_',
+#  '<><_>',
+#  '<_<>>',
+#  '<<_>>']
