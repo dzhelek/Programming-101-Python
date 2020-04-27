@@ -47,22 +47,22 @@ def find_possible_moves(lake):
     return result
 
 
-def dfs(stack, goal, history, done):
+def dfs():
+    global stack, goal, history
     lake = stack[-1]
 
-    if lake in done and history[-1] == lake:
+    if history and history[-1] == lake:
         history.pop()
         stack.pop()
-        return dfs(stack, goal, history, done)
+        return dfs()
     else:
-        done.add(lake)
         history.append(lake)
 
         moves = find_possible_moves(lake)
 
         if goal not in moves:
             stack.extend(moves)
-            return dfs(stack, goal, history, done)
+            return dfs()
 
         history.append(goal)
         return history
@@ -74,11 +74,17 @@ def frogs(n):
 
     lake = get_lilies(n // 2)
     goal_lake = get_lilies(n // 2, goal=True)
-    return dfs([lake], goal_lake, [], set())
+
+    global stack, goal, history
+    stack = [lake]
+    goal = goal_lake
+    history = []
+
+    return dfs()
 
 
 def main():
-    solution = frogs(9)
+    solution = frogs(7)
 
     for line in solution:
         print(' '.join(list(line)))
