@@ -1,15 +1,15 @@
-create table Languages (
-  id integer primary KEY,
-  language varchar(15),
-  answer varchar(100),
-  answered bool,
-  guide varchar(500)
+CREATE TABLE Languages (
+  id INTEGER PRIMARY KEY,
+  language VARCHAR(15),
+  answer VARCHAR(100),
+  answered BOOL,
+  guide VARCHAR(500)
   );
 
-alter table Languages
-  add column rating;
+ALTER TABLE Languages
+  ADD COLUMN rating INTEGER CHECK (1 < rating < 9);
 
-insert into Languages VALUES
+INSERT INTO Languages VALUES
   (1, "Python", "google", 0, "A folder named Python was created. Go there and fight with program.py!", 6),
   (2, "Go", "200 OK", 0, "A folder named Go was created. Go there and try to make Google Go run.", 4),
   (3, "Java", "object oriented programming", 0, "A folder named Java was created. Can you handle the class?", 8),
@@ -19,9 +19,9 @@ insert into Languages VALUES
   (7, "C++", "header files", 0, "Here be dragons! It's C++ time. Go to the C++ folder.", 7),
   (8, "JavaScript", "Douglas Crockford", 0, "NodeJS time. Go to JavaScript folder and Node your way!", 3)
 
-update Languages
-  set answered = 1
-  where id < 3;
+UPDATE Languages
+  SET answered = 1
+  WHERE id < 3;
 
-select * from Languages
-  where answer like "200 OK" or answer like "Lambda";
+SELECT * FROM Languages
+  WHERE answer LIKE "200 OK" OR answer LIKE "Lambda";
