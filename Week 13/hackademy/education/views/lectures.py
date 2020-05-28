@@ -14,3 +14,13 @@ def detail(request, lecture_id):
     lecture = get_object_or_404(Lecture, id=lecture_id)
     return render(request, 'lectures/detail.html',
                   {'lecture': lecture})
+
+
+class LectureCreateView(CreateView):
+    model = Lecture
+    fields = ['name', 'week', 'course', 'url']
+    template_name = 'lectures/create.html'
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('education:lectures:detail',
+                            kwargs={'lecture_id': self.object.id})
