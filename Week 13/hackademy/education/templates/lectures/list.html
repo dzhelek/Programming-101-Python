@@ -1,0 +1,26 @@
+{% extends "lectures/base.html" %}
+
+{% block content %}
+
+{% if lectures %}
+<table>
+	<thead>
+		<tr>
+			<th>Lecture</th>
+			<th>Course</th>
+		</tr>
+	</thead>
+	{% for lecture in lectures %}
+	<tr>
+		<td><a href="{% url 'education:lectures:detail' lecture.id %}">{{lecture.name}}</a></td>
+		<td>{{lecture.course}}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<p><strong>No lectures yet.</strong></p>
+{% endif %}
+
+<!--a href="{% url 'education:courses:create' %}">Add new</a-->
+
+{% endblock %}

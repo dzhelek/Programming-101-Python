@@ -2,10 +2,15 @@
 {% extends "courses/base.html" %}
 
 {% block content %}
-<h2>{{ course.name }}</h2>
+<h3>{{ course.name }}</h3>
+{% if lectures %}
 <ul>
 	{% for lecture in lectures %}
-	<li>{{ lecture.name }}</li>
+	<li><a href="{% url 'education:lectures:detail' lecture.id %}">{{ lecture.name }}</a></li>
 	{% endfor %}
 </ul>
+{% else %}
+<b>No lectures for this course yet</b>
+{% endif %}
+<a href="{% url 'education:courses:edit' course.id %}">Edit</a>
 {% endblock %}
