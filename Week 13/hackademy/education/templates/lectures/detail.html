@@ -1,6 +1,23 @@
 
-{% extends "courses/base.html" %}
+{% extends "lectures/base.html" %}
 
 {% block content %}
 <h3>{{ lecture.name }}</h3>
+
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Week</th>
+			<th>Course</th>
+			<th>URL</th>
+		</tr>
+	</thead>
+	<tr>
+		<td>{{lecture.name}}</td>
+		<td>{{lecture.week}}</td>
+		<td><a href="{% url 'education:courses:detail' lecture.course.id %}">{{lecture.course}}</a></td>
+		<td>{{lecture.url}}</td>
+	</tr>
+</table>
 {% endblock %}
