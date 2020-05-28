@@ -20,6 +20,10 @@ class Course(models.Model):
         if self.end_date:
             return self.end_date - self.start_date
 
+    @property
+    def months_duration(self):
+        return self.duration.days // 30
+
 
 class Lecture(models.Model):
     # identifier = models.IntegerField(unique=True)

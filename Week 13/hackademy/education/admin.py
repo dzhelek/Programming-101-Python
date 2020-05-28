@@ -11,7 +11,7 @@ class CourseAdmin(admin.ModelAdmin):
 
     def get_duration(self, obj):
         if obj.duration:
-            return f'{obj.duration.days // 30} months'
+            return f'{obj.months_duration} months'
 
         return 'N/A'
 
