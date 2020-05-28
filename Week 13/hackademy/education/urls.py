@@ -15,6 +15,7 @@ lectures_patterns = [
     path('', lectures.list, name='list'),
     path('<uuid:lecture_id>/', lectures.detail, name='detail'),
     path('new/', lectures.LectureCreateView.as_view(), name='create'),
+    path('<uuid:pk>/edit/', lectures.LectureUpdateView.as_view(), name='edit'),
 ]
 
 urlpatterns = [
